@@ -304,11 +304,11 @@
             //if no start/end dates set, check if an input element contains initial values
             if (typeof options.startDate === 'undefined' && typeof options.endDate === 'undefined') {
                 if ($(this.element).is('input[type=text]')) {
-                    var val = $(this.element).val(), 
+                    var val = $(this.element).val(),
                         split = val.split(this.separator);
-                    
+
                     start = end = null;
-                    
+
                     if (split.length == 2) {
                         start = moment(split[0], this.format);
                         end = moment(split[1], this.format);
@@ -725,9 +725,9 @@
 
                 this.updateInputText();
 
+                this.element.trigger('apply.daterangepicker', this);
                 this.hideCalendars();
                 this.hide();
-                this.element.trigger('apply.daterangepicker', this);
             }
         },
 
@@ -825,8 +825,8 @@
 
         clickApply: function (e) {
             this.updateInputText();
-            this.hide();
             this.element.trigger('apply.daterangepicker', this);
+            this.hide();
         },
 
         clickCancel: function (e) {
