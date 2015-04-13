@@ -536,7 +536,7 @@
 
             this.updateCalendars();
         },
-        
+
         keydown: function (e) {
             //hide on tab or enter
         	if ((e.keyCode === 9) || (e.keyCode === 13)) {
@@ -560,7 +560,7 @@
                 };
                 parentRightEdge = this.parentEl[0].clientWidth + this.parentEl.offset().left;
             }
-            
+
             if (this.drops == 'up')
             	containerTop = this.element.offset().top - this.container.outerHeight() - parentOffset.top;
             else
@@ -792,8 +792,10 @@
         setCustomDates: function(startDate, endDate) {
             this.chosenLabel = this.locale.customRangeLabel;
             if (startDate.isAfter(endDate)) {
+                var dstDiff = endDate.utcOffset() - startDate.utcOffset();
                 var difference = this.endDate.diff(this.startDate);
                 endDate = moment(startDate).add(difference, 'ms');
+                endDate = moment(endDate).add(dstDiff, 'm');
                 if (this.maxDate && endDate.isAfter(this.maxDate)) {
                   endDate = this.maxDate.clone();
                 }
